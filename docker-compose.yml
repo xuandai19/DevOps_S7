@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  github-runner:
+    image: ghcr.io/actions/actions-runner:latest
+    container_name: quickbite-restaurant-runner
+    restart: always
+    environment:
+      - REPO_URL=https://github.com/xuandai19/restaurant-service
+      - ACCESS_TOKEN=YOUR_GITHUB_PAT_TOKEN
+      - RUNNER_NAME=restaurant-self-hosted-runner
+      - RUNNER_LABELS=self-hosted,linux,x64,quickbite,restaurant-service
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runner_work:/home/runner/_work
+    user: "root"
